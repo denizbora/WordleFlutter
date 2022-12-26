@@ -61,7 +61,7 @@ class DailyWordService {
         var url = Uri.https('wordle.denizbora.net', '/NewDay/${_highScoreService.highScore.value}');
         var response = await http.get(url);
 
-        if(now.difference(_lastWordFetchDate)>Duration(days: 2)){
+        if(now.difference(_lastWordFetchDate)>const Duration(days: 2)){
           _streakService.streak.value=0;
         }
         _lastWordFetchDate = now;
@@ -76,7 +76,7 @@ class DailyWordService {
       barrierDismissible:false,
         AlertDialog(
       backgroundColor: black,
-      content: Container(
+      content: SizedBox(
         width: Get.width * 0.65,
         height: Get.height * 0.15,
         child:Center(child: Text("Lütfen internete bağlanınız.",style: GoogleFonts.inter(

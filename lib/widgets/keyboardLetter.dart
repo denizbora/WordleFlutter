@@ -24,7 +24,7 @@ class KeyboardLetter extends StatelessWidget {
               _controller.addLetter(letter);
             },
             child: Container(
-              margin: EdgeInsets.all(3),
+              margin: const EdgeInsets.all(3),
               width: Get.width / 14,
               height: Get.width / 8,
               decoration: BoxDecoration(

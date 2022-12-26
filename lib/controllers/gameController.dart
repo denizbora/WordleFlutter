@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/constants/constants.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:wordle/services/dailyWordService.dart';
 import 'package:wordle/services/highScoreService.dart';
 import 'package:wordle/services/streakService.dart';
@@ -81,7 +80,6 @@ class GameController extends GetxController {
 
   ValueNotifier<bool> isEnabled = ValueNotifier(true);
   bool pointAdded = false;
-  String day = "";
 
   GameController() {
     _highScoreService.highScore.addListener(() {
@@ -206,41 +204,29 @@ class GameController extends GetxController {
 
   Future<void> compare(int i) async {
     final prefs = await SharedPreferences.getInstance();
-
-    switch (i) {
-      case 1:
-        compareStep(i, prefs);
-        break;
-      case 2:
-        compareStep(i, prefs);
-        break;
-      case 3:
-        compareStep(i, prefs);
-        break;
-      case 4:
-        compareStep(i, prefs);
-        break;
-      case 5:
-        compareStep(i, prefs);
-        break;
-      case 6:
-        compareStep(i, prefs);
-        triesDecoration.value[i] = comp(tries.value[i]!);
-        if (tries.value["sixth"] != _dailyWordService.todaysWord.value) {
-          if (pointAdded == false) {
-            streak.value = 0;
-            prefs.setInt("streak", streak.value);
-          }
-          isEnabled.value = false;
-        }
-        break;
+    triesColumn[i] = true;
+    triesDecoration.value[i] = comp(tries.value[i]!);
+    if (tries.value[i] == _dailyWordService.todaysWord.value) {
+      if (pointAdded == false) {
+        pointAdded = true;
+        _highScoreService.highScore.value += 7 - i;
+        _streakService.streak.value++;
+        prefs.setBool('pointAdded', pointAdded);
+      }
+      isEnabled.value = false;
     }
-
+    if (i==5 && tries.value[i] != _dailyWordService.todaysWord.value) {
+      if (pointAdded == false) {
+        streak.value = 0;
+        prefs.setInt("streak", streak.value);
+      }
+      isEnabled.value = false;
+    }
     triesDecoration.notifyListeners();
     tries.notifyListeners();
   }
 
-  AddItem() async {
+  addItem() async {
     final prefs = await SharedPreferences.getInstance();
     for (int i = 0; i < triesColumn.length; i++) {
       if (!triesColumn[i]! && !tries.value[i]!.contains(' ')) {
@@ -272,7 +258,7 @@ class GameController extends GetxController {
                 prefs.setBool('isSixth', triesColumn[i]!);
                 break;
             }
-            compare(i + 1);
+            compare(i);
             break;
           }
         } else {
@@ -318,7 +304,7 @@ class GameController extends GetxController {
       pointAdded = prefs.getBool('pointAdded') ?? false;
       for (int i = 0; i < tries.value.length; i++) {
         if (tries.value[i] != "     ") {
-          compare(i + 1);
+          compare(i);
         }
       }
     }
@@ -327,7 +313,7 @@ class GameController extends GetxController {
   void openDialog() {
     Get.dialog(AlertDialog(
       backgroundColor: black,
-      content: Container(
+      content: SizedBox(
         width: Get.width * 0.65,
         height: Get.height * 0.5,
         child: Column(
@@ -336,14 +322,13 @@ class GameController extends GetxController {
             Text(
               pointAdded
                   ? "Tebrikler kazandınız."
-                  : "Kaybettiniz, sözcük : " +
-                      (_dailyWordService.todaysWord.value ?? ""),
+                  : "Kaybettiniz, sözcük : ${_dailyWordService.todaysWord.value!}",
               style: GoogleFonts.inter(
                 color: textColor,
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5),
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
               width: Get.width * 0.65,
               height: 2,
               color: darkGrey,
@@ -414,7 +399,7 @@ class GameController extends GetxController {
                 height: 35,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       "Paylaş",
                       style: TextStyle(color: textColor),
@@ -434,19 +419,5 @@ class GameController extends GetxController {
         ),
       ),
     ));
-  }
-
-  void compareStep(int i, SharedPreferences prefs) {
-    triesColumn[i - 1] = true;
-    triesDecoration.value[i - 1] = comp(tries.value[i - 1]!);
-    if (tries.value[i - 1] == _dailyWordService.todaysWord.value) {
-      if (pointAdded == false) {
-        pointAdded = true;
-        _highScoreService.highScore.value += 7 - i;
-        _streakService.streak.value++;
-        prefs.setBool('pointAdded', pointAdded);
-      }
-      isEnabled.value = false;
-    }
   }
 }

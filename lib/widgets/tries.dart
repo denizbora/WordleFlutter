@@ -26,7 +26,7 @@ class _TriesState extends State<Tries> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.all(2.5),
+                  margin: const EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
                   decoration: decorations[widget.tries]![0],
@@ -41,7 +41,7 @@ class _TriesState extends State<Tries> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(2.5),
+                  margin: const EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
                   decoration: decorations[widget.tries]![1],
@@ -56,7 +56,7 @@ class _TriesState extends State<Tries> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(2.5),
+                  margin: const EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
                   decoration: decorations[widget.tries]![2],
@@ -71,7 +71,7 @@ class _TriesState extends State<Tries> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(2.5),
+                  margin: const EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
                   decoration: decorations[widget.tries]![3],
@@ -86,7 +86,7 @@ class _TriesState extends State<Tries> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(2.5),
+                  margin: const EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
                   decoration: decorations[widget.tries]![4],

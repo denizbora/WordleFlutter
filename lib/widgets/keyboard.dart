@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:wordle/widgets/keyboardButton.dart';
 import 'package:wordle/widgets/keyboardLetter.dart';
 
-import '../controllers/gameController.dart';
 
 class Keyboard extends StatefulWidget {
   const Keyboard({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class Keyboard extends StatefulWidget {
 class _KeyboardState extends State<Keyboard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: Get.height * 0.277,
       child: Column(
         children: [

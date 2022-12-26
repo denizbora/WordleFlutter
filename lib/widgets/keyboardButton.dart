@@ -21,11 +21,11 @@ class KeyboardButton extends StatelessWidget {
           _controller.removeLetter();
         }
         else{
-          _controller.AddItem();
+          _controller.addItem();
         }
       },
       child: Container(
-        margin: EdgeInsets.all(3),
+        margin: const EdgeInsets.all(3),
         width: Get.width / 13 + 20,
         height: Get.width / 8,
         decoration: BoxDecoration(
