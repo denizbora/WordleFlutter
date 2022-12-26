@@ -8,7 +8,7 @@ import '../controllers/gameController.dart';
 class Tries extends StatefulWidget {
   const Tries({Key? key, required this.tries}) : super(key: key);
 
-  final String tries;
+  final int tries;
 
   @override
   State<Tries> createState() => _TriesState();
@@ -29,10 +29,10 @@ class _TriesState extends State<Tries> {
                   margin: EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
-                  decoration: decorations[widget.tries][0],
+                  decoration: decorations[widget.tries]![0],
                   child: Center(
                     child: Text(
-                      tries[widget.tries][0],
+                      tries[widget.tries]![0],
                       style: GoogleFonts.inter(
                           color: textColor,
                           fontSize: 24,
@@ -44,10 +44,10 @@ class _TriesState extends State<Tries> {
                   margin: EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
-                  decoration: decorations[widget.tries][1],
+                  decoration: decorations[widget.tries]![1],
                   child: Center(
                     child: Text(
-                      tries[widget.tries][1],
+                      tries[widget.tries]![1],
                       style: GoogleFonts.inter(
                           color: textColor,
                           fontSize: 24,
@@ -59,10 +59,10 @@ class _TriesState extends State<Tries> {
                   margin: EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
-                  decoration: decorations[widget.tries][2],
+                  decoration: decorations[widget.tries]![2],
                   child: Center(
                     child: Text(
-                      tries[widget.tries][2],
+                      tries[widget.tries]![2],
                       style: GoogleFonts.inter(
                           color: textColor,
                           fontSize: 24,
@@ -74,10 +74,10 @@ class _TriesState extends State<Tries> {
                   margin: EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
-                  decoration: decorations[widget.tries][3],
+                  decoration: decorations[widget.tries]![3],
                   child: Center(
                     child: Text(
-                      tries[widget.tries][3],
+                      tries[widget.tries]![3],
                       style: GoogleFonts.inter(
                           color: textColor,
                           fontSize: 24,
@@ -89,10 +89,10 @@ class _TriesState extends State<Tries> {
                   margin: EdgeInsets.all(2.5),
                   width: Get.height * 0.086,
                   height: Get.height * 0.086,
-                  decoration: decorations[widget.tries][4],
+                  decoration: decorations[widget.tries]![4],
                   child: Center(
                     child: Text(
-                      tries[widget.tries][4],
+                      tries[widget.tries]![4],
                       style: GoogleFonts.inter(
                           color: textColor,
                           fontSize: 24,

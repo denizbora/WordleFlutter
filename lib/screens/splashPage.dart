@@ -1,8 +1,13 @@
+import 'dart:async';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wordle/constants/constants.dart';
 import 'package:wordle/screens/mainPage.dart';
+import 'package:wordle/services/dailyWordService.dart';
+import 'package:wordle/services/highScoreService.dart';
 
 import '../controllers/gameController.dart';
 import '../widgets/gameOverWidget.dart';
@@ -14,14 +19,16 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
-  final GameController _controller = Get.put(GameController());
+class _SplashPageState extends State<SplashPage> with AfterLayoutMixin<SplashPage>{
+  final DailyWordService _dailyWordService = Get.find<DailyWordService>();
 
   @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 3)).then((value) =>
-        Get.off(() => MainPage()));
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    _dailyWordService.todaysWord.addListener(() {
+      Get.off(() => const MainPage());
+    });
+
+    _dailyWordService.fetchTodaysWord();
   }
 
   @override
@@ -33,5 +40,6 @@ class _SplashPageState extends State<SplashPage> {
       child: Center(child: Container(width: 250,height: 250,decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/logo.png"))),)),
     );
   }
+
 
 }

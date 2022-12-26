@@ -18,14 +18,19 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final GameController _controller = Get.put(GameController());
+
   @override
   void initState() {
     super.initState();
     _controller.getPreferances();
+    if(!_controller.isEnabled.value){
+      _controller.openDialog();
+    }
+    _controller.isEnabled.addListener(() {_controller.openDialog();});
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: black,
       appBar: AppBar(
@@ -65,8 +70,8 @@ class _MainPageState extends State<MainPage> {
               SizedBox(
                 width: 3,
               ),
-              ValueListenableBuilder(
-                valueListenable: _controller.point,
+             ValueListenableBuilder(
+                valueListenable: _controller.highScore,
                 builder: (context, value, child) {
                   return Text(
                     value.toString(),
@@ -105,12 +110,12 @@ class _MainPageState extends State<MainPage> {
               height: Get.height * 0.5625,
               child: Column(
                 children: [
-                  Tries(tries: "first"),
-                  Tries(tries: "second"),
-                  Tries(tries: "third"),
-                  Tries(tries: "fourth"),
-                  Tries(tries: "fifth"),
-                  Tries(tries: "sixth"),
+                  Tries(tries: 0),
+                  Tries(tries: 1),
+                  Tries(tries: 2),
+                  Tries(tries: 3),
+                  Tries(tries: 4),
+                  Tries(tries: 5),
                 ],
               ),
             ),

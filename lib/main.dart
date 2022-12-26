@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wordle/screens/mainPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/screens/splashPage.dart';
+import 'package:wordle/services/dailyWordService.dart';
+import 'package:wordle/services/highScoreService.dart';
+import 'package:wordle/services/streakService.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await putDependencies();
+
   runApp(const MyApp());
+}
+
+Future<void> putDependencies() async {
+  await Get.putAsync(() async => await SharedPreferences.getInstance());
+  ConnectivityResult isConnect = await checkConnectivity();
+
+  Get.put(HighScoreService());
+  Get.put(StreakService());
+  Get.put(DailyWordService(isConnect));
+
+}
+Future<ConnectivityResult> checkConnectivity() async{
+  final Connectivity connectivity = Connectivity();
+  return await connectivity.checkConnectivity();
 }
 
 class MyApp extends StatelessWidget {

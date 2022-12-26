@@ -6,7 +6,7 @@ import '../controllers/gameController.dart';
 class GameOverWidget extends StatelessWidget {
   GameOverWidget({Key? key, required this.tries}) : super(key: key);
 
-  final String tries;
+  final int tries;
 
   final GameController _controller = Get.put(GameController());
 
@@ -17,31 +17,31 @@ class GameOverWidget extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.all(3),
-          decoration: _controller.triesDecoration.value[tries][0],
+          decoration: _controller.triesDecoration.value[tries]![0],
           width: 35,
           height: 35,
         ),
         Container(
           margin: EdgeInsets.all(3),
-          decoration: _controller.triesDecoration.value[tries][1],
+          decoration: _controller.triesDecoration.value[tries]![1],
           width: 35,
           height: 35,
         ),
         Container(
           margin: EdgeInsets.all(3),
-          decoration: _controller.triesDecoration.value[tries][2],
+          decoration: _controller.triesDecoration.value[tries]![2],
           width: 35,
           height: 35,
         ),
         Container(
           margin: EdgeInsets.all(3),
-          decoration: _controller.triesDecoration.value[tries][3],
+          decoration: _controller.triesDecoration.value[tries]![3],
           width: 35,
           height: 35,
         ),
         Container(
           margin: EdgeInsets.all(3),
-          decoration: _controller.triesDecoration.value[tries][4],
+          decoration: _controller.triesDecoration.value[tries]![4],
           width: 35,
           height: 35,
         )
