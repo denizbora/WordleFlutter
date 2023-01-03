@@ -120,6 +120,9 @@ class GameController extends GetxController {
             int a = tries.value[i]!.indexOf(' ');
             tries.value[i] = replaceCharAt(tries.value[i]!, a - 1, ' ');
           }
+          else{
+            tries.value[i]=replaceCharAt(tries.value[i]!, tries.value[i]!.length-1, ' ');
+          }
           break;
         }
       }
@@ -250,7 +253,7 @@ class GameController extends GetxController {
                 prefs.setBool('isFourth', triesColumn[i]!);
                 break;
               case 4:
-                prefs.setString('fift', tries.value[i]!);
+                prefs.setString('fifth', tries.value[i]!);
                 prefs.setBool('isFifth', triesColumn[i]!);
                 break;
               case 5:
