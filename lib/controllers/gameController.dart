@@ -43,7 +43,9 @@ class GameController extends GetxController {
     "N": lightGrey,
     "M": lightGrey,
     "Ö": lightGrey,
-    "Ç": lightGrey
+    "Ç": lightGrey,
+    "del": lightGrey,
+    "enter": lightGrey
   });
   ValueNotifier<Map<int, String>> tries = ValueNotifier<Map<int, String>>({
     0: "     ",
@@ -96,6 +98,18 @@ class GameController extends GetxController {
         oldString.substring(index + 1);
   }
 
+  void keyboardButtonPressed(String character) {
+    if (character.length == 1) {
+      addLetter(character);
+    } else {
+      if (character == "enter") {
+        addItem();
+      } else if (character == "del") {
+        removeLetter();
+      }
+    }
+  }
+
   void addLetter(String item) {
     if (isEnabled.value) {
       for (int i = 0; i < triesColumn.length; i++) {
@@ -116,9 +130,9 @@ class GameController extends GetxController {
     if (isEnabled.value) {
       for (int i = 0; i < triesColumn.length; i++) {
         if (!triesColumn[i]!) {
-          for(int j = tries.value[i]!.length-1;j>=0;j--){
-            if(tries.value[i]![j]!=' '){
-              tries.value[i]=replaceCharAt(tries.value[i]!, j, ' ');
+          for (int j = tries.value[i]!.length - 1; j >= 0; j--) {
+            if (tries.value[i]![j] != ' ') {
+              tries.value[i] = replaceCharAt(tries.value[i]!, j, ' ');
               break;
             }
           }
@@ -217,7 +231,7 @@ class GameController extends GetxController {
       }
       isEnabled.value = false;
     }
-    if (i==5 && tries.value[i] != _dailyWordService.todaysWord.value) {
+    if (i == 5 && tries.value[i] != _dailyWordService.todaysWord.value) {
       if (pointAdded == false) {
         streak.value = 0;
         prefs.setInt("streak", streak.value);
@@ -289,8 +303,7 @@ class GameController extends GetxController {
       await prefs.remove('isFifth');
       await prefs.remove('isSixth');
       await prefs.remove('pointAdded');
-    }
-    else {
+    } else {
       tries.value[0] = prefs.getString('first') ?? "     ";
       tries.value[1] = prefs.getString('second') ?? "     ";
       tries.value[2] = prefs.getString('third') ?? "     ";
@@ -371,7 +384,7 @@ class GameController extends GetxController {
                 var text = "Wordle Türkçe ";
                 for (int i = 0; i < triesColumn.length; i++) {
                   if (triesColumn[i]!) {
-                    text += "${i+1}/6\n";
+                    text += "${i + 1}/6\n";
                     break;
                   }
                 }
