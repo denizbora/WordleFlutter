@@ -116,12 +116,11 @@ class GameController extends GetxController {
     if (isEnabled.value) {
       for (int i = 0; i < triesColumn.length; i++) {
         if (!triesColumn[i]!) {
-          if (tries.value[i]!.contains(' ')) {
-            int a = tries.value[i]!.indexOf(' ');
-            tries.value[i] = replaceCharAt(tries.value[i]!, a - 1, ' ');
-          }
-          else{
-            tries.value[i]=replaceCharAt(tries.value[i]!, tries.value[i]!.length-1, ' ');
+          for(int j = tries.value[i]!.length-1;j>=0;j--){
+            if(tries.value[i]![j]!=' '){
+              tries.value[i]=replaceCharAt(tries.value[i]!, j, ' ');
+              break;
+            }
           }
           break;
         }
