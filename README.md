@@ -1,3 +1,5 @@
+![Wordle](https://user-images.githubusercontent.com/45859791/163589065-569ed5b2-4838-4dc1-82ba-a059e19955dc.png)
+
 # Wordle
 Her gün yeni, 5 harfli bulmacayı 6 denemede bulun.
 Normal Wordle'dan farklı olarak oyuna seviye sistemi eklenmiştir.
